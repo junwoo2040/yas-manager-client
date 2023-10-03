@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-import Sidebar from './stories/Sidebar/Sidebar';
+import { FC } from "react";
+import { Outlet } from "react-router-dom";
 
-function App() {
-    const [count, setCount] = useState(0);
+import Sidebar from "@components/Sidebar";
 
-    return (
-        <>
-            <Sidebar></Sidebar>
-        </>
-    );
-}
+const App: FC = () => {
+  return (
+    <div className="flex h-screen w-screen flex-grow">
+      <Sidebar />
+      <main className="flex-grow bg-slate-100 p-4">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
 export default App;
