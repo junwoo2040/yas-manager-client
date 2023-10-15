@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import EventsTable from "@components/EventsTable";
+import EventsTable from "@organisms/EventsTable";
 
 const EventsLayout: FC = () => {
   return (

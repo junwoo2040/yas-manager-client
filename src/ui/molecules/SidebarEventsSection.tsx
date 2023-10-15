@@ -3,7 +3,7 @@ import { LuCalendarDays } from "react-icons/lu";
 
 import { useGetAllEvents } from "@hooks/database/fetchEvent";
 
-import SidebarEntry from "./SidebarEntry";
+import SidebarEntry from "@atoms/SidebarEntry";
 
 /*
 import { useQuery } from "@tanstack/react-query";
@@ -35,24 +35,23 @@ const SidebarEventSection: FC = () => {
 
   return (
     <li>
-      <SidebarEntry
-        title="Events"
-        path="event"
-        color="rgb(148 163 184)"
-        Icon={LuCalendarDays}
-      />
       <ul>
+        <SidebarEntry
+          title="Events"
+          path="event"
+          color="rgb(148 163 184)"
+          Icon={LuCalendarDays}
+        />
         {allEvents.map((event, index) => {
           if (!event) return;
 
           return (
-            <li key={index}>
-              <SidebarEntry
-                title={event.name}
-                path={"event/" + event.path}
-                color="rgb(203 213 225)"
-              />
-            </li>
+            <SidebarEntry
+              key={index}
+              title={event.name}
+              path={"event/" + event.path}
+              color="rgb(203 213 225)"
+            />
           );
         })}
       </ul>

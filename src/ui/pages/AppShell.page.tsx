@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 
-import Sidebar from "@components/Sidebar";
-import Navigation from "../components/Navigation";
+import Sidebar from "@organisms/Sidebar";
+import Navigation from "@organisms/Navigation";
 
 const AppShellPage: FC = () => {
   return (

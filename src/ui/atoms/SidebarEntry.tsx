@@ -10,14 +10,14 @@ interface Props {
 
 const SidebarEntry = ({ title, path, color, Icon }: Props) => {
   return (
-    <div className="flex items-center p-2" style={{ backgroundColor: color }}>
+    <li className="flex items-center p-2" style={{ backgroundColor: color }}>
       {Icon ? (
         <Icon className="mr-2 h-6 w-6" />
       ) : (
         <div className="mr-2 h-6 w-6"></div>
       )}
       <Link to={path}>{title}</Link>
-    </div>
+    </li>
   );
 };
 

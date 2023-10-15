@@ -1,3 +1,4 @@
+import EventTasksTable from "@organisms/EventTasksTable";
 import { useGetEventFromPath } from "@hooks/database/fetchEvent";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
@@ -9,6 +10,7 @@ const EventTasks: FC = () => {
   return (
     <>
       <h1>{event?.name} Tasks</h1>
+      <EventTasksTable />
     </>
   );
 };

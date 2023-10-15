@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 
+import EventRecordsTable from "@organisms/EventRecordsTable";
+
 import { useGetEventFromPath } from "@hooks/database/fetchEvent";
-import EventRecordsTable from "@components/EventRecordsTable";
 
 const EventRecords: FC = () => {
   const { eventPath } = useParams();
