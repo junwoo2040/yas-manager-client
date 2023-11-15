@@ -1,4 +1,4 @@
-export interface EventData {
+export type EventData = {
   id: string;
   path: string;
   name: string;
@@ -6,7 +6,7 @@ export interface EventData {
   end: Date;
   location?: string;
   description?: string;
-}
+};
 
 export const eventsMockData: EventData[] = [
   {

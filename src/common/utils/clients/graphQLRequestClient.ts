@@ -5,7 +5,7 @@ const requestHeaders = {
 };
 
 const graphQLRequestClient = new GraphQLClient(
-  "http://localhost:8000" as string,
+  "http://localhost:8000/graphql" as string,
   {
     headers: requestHeaders,
   },

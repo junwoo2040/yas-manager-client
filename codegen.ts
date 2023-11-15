@@ -1,15 +1,20 @@
-import { CodegenConfig } from "@graphql-codegen/cli";
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "http://localhost:8000/graphql",
-  documents: ["src/**/*.tsx", "src/**/*.ts"],
-  ignoreNoDocuments: true, // for better experience with the watcher
+  documents: "./src/**/*.graphql",
   generates: {
-    "./src/common/gql/": {
-      preset: "client",
+    "./src/graphql/generated.ts": {
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-query",
+      ],
+      config: {
+        fetcher: "graphql-request",
+        exposeQueryKeys: true,
+      },
     },
   },
-  watch: true,
 };
-
 export default config;

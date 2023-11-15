@@ -23,13 +23,19 @@
     /* Paths */
     "baseUrl": "./src",
     "paths": {
+      /* Common Utils */
       "@gql/*": ["common/gql/*"],
       "@utils/*": ["common/utils/*"],
+      /* UI */
+      "@atoms/*": ["ui/atoms/*"],
+      "@molecules/*": ["ui/molecules/*"],
+      "@organisms/*": ["ui/organisms/*"],
       "@layouts/*": ["ui/layouts/*"],
       "@pages/*": ["ui/pages/*"],
-      "@components/*": ["ui/components/*"],
+      /* Data & Hooks */
       "@data/*": ["data/*"],
       "@hooks/*": ["hooks/*"],
+      /* Root */
       "@src/*": ["*"]
     }
   },

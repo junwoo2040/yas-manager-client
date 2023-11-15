@@ -1,30 +1,53 @@
-import { useGetEventFromPath } from "@hooks/database/fetchEvent";
 import { FC } from "react";
-import { useParams } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
+
+import { useGetEventByPathQuery } from "@src/graphql/generated";
+import graphQLRequestClient from "@utils/clients/graphQLRequestClient";
 
 const EventInfo: FC = () => {
+  const navigate = useNavigate();
   const { eventPath } = useParams();
-  const event = useGetEventFromPath(eventPath);
+
+  if (!eventPath) {
+    navigate("/404");
+    return <></>;
+  }
+
+  const { status, data, error, isError, isFetching } = useGetEventByPathQuery(
+    graphQLRequestClient,
+    {
+      path: eventPath,
+    },
+    {
+      retry: 1,
+    },
+  );
+
+  if (isError) {
+    navigate("/404");
+    return <></>;
+  }
 
   return (
-    <div>
-      <h1>{event?.name}</h1>
-      <p>
-        <b>Date:</b> {event?.start.toDateString()}
-      </p>
-      <p>
-        <b>Start:</b> {event?.start.toTimeString()}
-      </p>
-      <p>
-        <b>End:</b> {event?.end.toTimeString()}
-      </p>
-      <p>
-        <b>Location:</b> {event?.location}
-      </p>
-      <p>
-        <b>Description:</b> {event?.description}
-      </p>
-    </div>
+    <>
+      {isFetching ? (
+        <p>Loading</p>
+      ) : (
+        <div>
+          <h1>{data?.event?.name}</h1>
+          <p>
+            <b>Date:</b> {new Date(data?.event?.start).toDateString()}
+          </p>
+          <p>
+            <b>Start:</b> {new Date(data?.event?.start).toTimeString()}
+          </p>
+          <p>
+            <b>End:</b> {new Date(data?.event?.end).toTimeString()}
+          </p>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -1,0 +1,26 @@
+query getAllEventHeaders {
+  events {
+    id
+    name
+    path
+  }
+}
+
+query getAllEventDetails {
+  events {
+    id
+    name
+    path
+    start
+    end
+  }
+}
+
+query getEventByPath($path: String!) {
+  event(input: { path: $path }) {
+    id
+    name
+    start
+    end
+  }
+}

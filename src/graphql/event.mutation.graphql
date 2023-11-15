@@ -1,0 +1,9 @@
+mutation createEvent($name: String!, $start: String!, $end: String!) {
+  createEvent(input: { name: $name, start: $start, end: $end }) {
+    id
+    name
+    path
+    start
+    end
+  }
+}

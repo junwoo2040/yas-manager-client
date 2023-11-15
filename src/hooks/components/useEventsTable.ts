@@ -1,12 +1,13 @@
-import { useGetAllEvents } from "@hooks/database/fetchEvent";
+import { useGetAllEventDetailsQuery } from "@src/graphql/generated";
 import {
   createColumnHelper,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import graphQLRequestClient from "@utils/clients/graphQLRequestClient";
 import { useState } from "react";
 
-type Event = {
+export type EventRow = {
   id: string;
   name: string;
   date: string;
@@ -17,7 +18,7 @@ type Event = {
   path: string;
 };
 
-const columnHelper = createColumnHelper<Event>();
+const columnHelper = createColumnHelper<EventRow>();
 
 const columns = [
   columnHelper.accessor("id", {
@@ -40,33 +41,24 @@ const columns = [
     header: "End Time",
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("location", {
-    header: "Location",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("description", {
-    header: "Description",
-    cell: (info) => info.getValue(),
-  }),
 ];
 
 const useEventsTable = () => {
-  console.log(useGetAllEvents());
-
-  const defaultData: Event[] = useGetAllEvents().map(
-    ({ id, name, start, end, location, description, path }) => ({
-      id,
-      name,
-      date: start.toDateString(),
-      startTime: start.toTimeString(),
-      endTime: end.toTimeString(),
-      location,
-      description,
-      path,
-    }),
+  const { data: rawData } = useGetAllEventDetailsQuery(
+    graphQLRequestClient,
+    {},
   );
 
-  const [data, setData] = useState(() => [...defaultData]);
+  const defaultData = rawData?.events.map(({ id, name, start, end, path }) => ({
+    id,
+    name,
+    path,
+    date: start.toDateString(),
+    startTime: start.toTimeString(),
+    endTime: end.toTimeString(),
+  }));
+
+  const [data, setData] = useState(() => defaultData);
 
   const table = useReactTable({
     data,

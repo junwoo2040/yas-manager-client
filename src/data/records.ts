@@ -4,7 +4,7 @@ export enum RecordType {
   DONATION,
 }
 
-export interface Record {
+export type RecordData = {
   id: string;
   eventId?: string;
   type: RecordType;
@@ -14,9 +14,9 @@ export interface Record {
   };
   date: Date;
   check: number;
-}
+};
 
-export const recordsMockData: Record[] = [
+export const recordsMockData: RecordData[] = [
   {
     id: "1",
     type: RecordType.MERCH,
